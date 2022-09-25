@@ -2,11 +2,15 @@ import type { NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import Page from '@/modules/Common/Page';
-import Home from '@/modules/Home';
+import Header from '@/modules/Header';
+import Content from '@/modules/Content';
+import Tools from '@/modules/Tools';
 
 const HomePage: NextPage = () => (
   <Page>
-    <Home />
+    <Header />
+    <Content />
+    <Tools />
   </Page>
 );
 

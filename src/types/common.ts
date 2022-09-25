@@ -15,3 +15,9 @@ export type ApiResponse<T> = {
 export type DangerouslySetInnerHTML = {
   __html: string;
 };
+
+export type FileInfo = {
+  id: string;
+  dataUrl: string;
+  setTings: Record<string, string>;
+};

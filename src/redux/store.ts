@@ -9,6 +9,7 @@ import {
 // import logger from 'redux-logger';
 
 import commonReducer from '@/redux/slice/commonSlice';
+import fileReducer from '@/redux/slice/fileSlice';
 
 import type { Middleware } from 'redux';
 import type { PreloadedState } from '@reduxjs/toolkit';
@@ -19,6 +20,7 @@ const getDefaultMiddlewareOptions = {
 
 const rootReducer = combineReducers({
   common: commonReducer,
+  file: fileReducer,
 });
 
 const makeStore = (preloadedState?: PreloadedState<RootState>) => {
