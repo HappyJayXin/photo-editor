@@ -1,7 +1,7 @@
 module.exports = {
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-tw',
+    locales: ['zh-tw'],
     lowerCaseLng: true,
     ignoreRoutes: [
       '/public',

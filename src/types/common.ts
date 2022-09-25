@@ -17,7 +17,8 @@ export type DangerouslySetInnerHTML = {
 };
 
 export type FileInfo = {
-  id: string;
+  uuid: number;
+  name: string;
   dataUrl: string;
-  setTings: Record<string, string>;
+  settings: Record<string, string>;
 };

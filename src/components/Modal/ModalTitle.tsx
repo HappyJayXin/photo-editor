@@ -5,7 +5,7 @@ import Typography from '../Typography';
 
 type Props = {
   title: string;
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const TitleWrapper = styled.header`
@@ -24,14 +24,16 @@ const TitleWrapper = styled.header`
 
 const ModalTitle = ({ title, onClose }: Props) => (
   <TitleWrapper>
-    <Box marginLeft="auto">
+    <Box marginLeft={onClose ? 'auto' : '0'}>
       <Typography variant="subTitle1" as="h6" color="primary">
         {title}
       </Typography>
     </Box>
-    <Box marginLeft="auto">
-      <Icon glyph="close" onClick={onClose} />
-    </Box>
+    {onClose ? (
+      <Box marginLeft="auto">
+        <Icon glyph="close" onClick={onClose} />
+      </Box>
+    ) : null}
   </TitleWrapper>
 );
 
