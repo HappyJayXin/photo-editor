@@ -29,6 +29,10 @@ const useFileUpload = () => {
     }
   }, [files]);
 
+  const clearAllFiles = () => {
+    setFiles(undefined);
+  };
+
   const getInputProps = () => ({
     type: 'file',
     hidden: true,
@@ -36,7 +40,7 @@ const useFileUpload = () => {
     onChange: onInputChange,
   });
 
-  return { open, getInputProps, files, totalSize };
+  return { open, getInputProps, files, totalSize, clearAllFiles };
 };
 
 export default useFileUpload;

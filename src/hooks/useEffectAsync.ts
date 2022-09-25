@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import type { DependencyList } from 'react';
 
-export const useEffectAsync = (
+const useEffectAsync = (
   asyncFunc: () => void,
   inputs: DependencyList | undefined,
 ) => {
@@ -9,3 +9,5 @@ export const useEffectAsync = (
     asyncFunc();
   }, inputs);
 };
+
+export default useEffectAsync;
