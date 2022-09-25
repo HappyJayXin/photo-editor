@@ -8,6 +8,7 @@ import Modal, {
   ModalAction,
 } from '@/components/Modal';
 import Typography from '@/components/Typography';
+import useFileUpload from '@/hooks/useFileUpload';
 import { useTypedSelector } from '@/redux/hook';
 
 const UploadModal = () => {
@@ -20,6 +21,8 @@ const UploadModal = () => {
     setIsOpen(file.info === null);
   }, [file.info]);
 
+  const { open, getInputProps } = useFileUpload();
+
   return (
     <Modal isOpen={isOpen}>
       <ModalTitle title={t('modal_upload_title')} />
@@ -27,7 +30,8 @@ const UploadModal = () => {
         <Typography variant="body1">{t('modal_upload_content')}</Typography>
       </ModalContent>
       <ModalAction>
-        <Button>{t('upload')}</Button>
+        <Button onClick={open}>{t('upload')}</Button>
+        <input {...getInputProps()} />
       </ModalAction>
     </Modal>
   );
