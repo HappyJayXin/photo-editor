@@ -1,7 +1,19 @@
 import { useState, useRef, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 
-const useFileUpload = () => {
+type InputProps = {
+  type: 'file';
+  hidden: boolean;
+  ref: React.RefObject<HTMLInputElement>;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  accept?: string;
+};
+
+type Params = {
+  accept?: string;
+};
+
+const useFileUpload = ({ accept }: Params) => {
   const [files, setFiles] = useState<FileList>();
   const [totalSize, setTotalSize] = useState(0);
 
@@ -33,12 +45,18 @@ const useFileUpload = () => {
     setFiles(undefined);
   };
 
-  const getInputProps = () => ({
-    type: 'file',
-    hidden: true,
-    ref: inputRef,
-    onChange: onInputChange,
-  });
+  const getInputProps = () => {
+    const props: InputProps = {
+      type: 'file',
+      hidden: true,
+      ref: inputRef,
+      onChange: onInputChange,
+    };
+    if (accept) {
+      props.accept = accept;
+    }
+    return props;
+  };
 
   return { open, getInputProps, files, totalSize, clearAllFiles };
 };

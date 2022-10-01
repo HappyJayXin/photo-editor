@@ -25,7 +25,9 @@ const UploadModal = () => {
     setIsOpen(file.info === null);
   }, [file.info]);
 
-  const { open, getInputProps, files, clearAllFiles } = useFileUpload();
+  const { open, getInputProps, files, clearAllFiles } = useFileUpload({
+    accept: 'image/jpeg, image/png, image/jpg',
+  });
 
   useEffectAsync(async () => {
     if (files?.length) {
