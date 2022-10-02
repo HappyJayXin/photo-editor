@@ -19,6 +19,7 @@ export type DangerouslySetInnerHTML = {
 export type FileInfo = {
   uuid: string;
   name: string;
-  dataUrl: string;
+  imageUrl?: string;
+  file?: File;
   settings: Record<string, string>;
 };

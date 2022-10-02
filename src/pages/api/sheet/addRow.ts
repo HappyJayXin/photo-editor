@@ -3,7 +3,7 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import creds from '../../../../public/credentials.json';
 
 import type { FileInfo } from '@/types/common';
-type Data = Omit<FileInfo, 'settings'>;
+type Data = Omit<FileInfo, 'settings' | 'file'>;
 
 const addRow = async (data: Data) => {
   const doc = new GoogleSpreadsheet(process.env.DOC_ID);
@@ -17,7 +17,7 @@ const addRow = async (data: Data) => {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = req.query as unknown as Data;
 
-  if (!data.dataUrl || !data.uuid || !data.name) {
+  if (!data.imageUrl || !data.uuid || !data.name) {
     res.status(400).json({
       status: 'error',
       data: 'Should provider dataUrl and is query!',

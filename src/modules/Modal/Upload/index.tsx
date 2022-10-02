@@ -12,7 +12,6 @@ import useFileUpload from '@/hooks/useFileUpload';
 import { useActions, useTypedSelector } from '@/redux/hook';
 import uuidv4 from '@/helpers/utils/uuidv4';
 import useEffectAsync from '@/hooks/useEffectAsync';
-import getImageData from '@/helpers/getImageData';
 
 const UploadModal = () => {
   const { t } = useTranslation();
@@ -31,12 +30,11 @@ const UploadModal = () => {
 
   useEffectAsync(async () => {
     if (files?.length) {
-      const dataUrl = await getImageData(files[0]);
       const uuid = uuidv4();
       setFileInfo({
         uuid,
         name: files[0].name,
-        dataUrl,
+        file: files[0],
         settings: {},
       });
       clearAllFiles();
