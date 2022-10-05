@@ -1,5 +1,5 @@
 const Content = () => {
-  return <div>Content component</div>;
+  return <div />;
 };
 
 export default Content;

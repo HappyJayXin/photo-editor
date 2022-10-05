@@ -11,4 +11,5 @@ export const PageWrapper = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   overflow: auto;
+  background-color: ${({ theme }) => theme.colors.grey[100]};
 `;

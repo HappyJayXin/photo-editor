@@ -1,5 +1,7 @@
 {
   "upload": "上傳",
+  "share": "分享",
+
   "modal_upload_title": "上傳檔案",
   "modal_upload_content": "上傳你要編輯的圖片檔案，馬上開始編輯。"
 }

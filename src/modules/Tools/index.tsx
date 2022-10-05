@@ -1,5 +1,5 @@
 const Tools = () => {
-  return <div>Tools component</div>;
+  return <div />;
 };
 
 export default Tools;
