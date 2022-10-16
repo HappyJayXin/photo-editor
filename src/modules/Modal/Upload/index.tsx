@@ -8,6 +8,7 @@ import Modal, {
   ModalAction,
 } from '@/components/Modal';
 import Typography from '@/components/Typography';
+
 import useFileUpload from '@/hooks/useFileUpload';
 import { useActions, useTypedSelector } from '@/redux/hook';
 import uuidv4 from '@/helpers/utils/uuidv4';
@@ -24,12 +25,13 @@ const UploadModal = () => {
     setIsOpen(file.info === null);
   }, [file.info]);
 
-  const { open, getInputProps, files, clearAllFiles } = useFileUpload({
+  const { open, getInputProps, files, clearAllFiles, error } = useFileUpload({
     accept: 'image/jpeg, image/png, image/jpg',
+    limitSize: 1024 * 1024 * 2,
   });
 
   useEffectAsync(async () => {
-    if (files?.length) {
+    if (!error && files?.length) {
       const uuid = uuidv4();
       setFileInfo({
         uuid,
@@ -39,7 +41,7 @@ const UploadModal = () => {
       });
       clearAllFiles();
     }
-  }, [files]);
+  }, [files, error]);
 
   return (
     <Modal isOpen={isOpen}>

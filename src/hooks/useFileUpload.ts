@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
+import { useToast } from '@/components/Toast';
 
 type InputProps = {
   type: 'file';
@@ -11,23 +12,57 @@ type InputProps = {
 
 type Params = {
   accept?: string;
+  limitSize?: number;
 };
 
-const useFileUpload = ({ accept }: Params) => {
+const FILE_LARGE_ERROR_MSG = '檔案太大';
+
+const useFileUpload = ({ accept, limitSize }: Params) => {
   const [files, setFiles] = useState<FileList>();
   const [totalSize, setTotalSize] = useState(0);
+  const [error, setError] = useState('');
+
+  const { addToast } = useToast();
+  const openInfoToast = () => {
+    addToast(FILE_LARGE_ERROR_MSG, {
+      appearance: 'warning',
+      closeButton: true,
+    });
+  };
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const open = () => {
     if (inputRef.current) {
+      inputRef.current.value = ''; // reset file value
       inputRef.current.click();
+      setError(''); // reset error msg
     }
   };
 
+  const fileLimitCheck = (files: FileList) => {
+    let isChecked = true;
+    if (!limitSize) return isChecked;
+
+    for (let index = 0; index < files.length; index++) {
+      if (files[index].size > limitSize) {
+        isChecked = false;
+        break;
+      }
+    }
+    return isChecked;
+  };
+
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files?.length) {
-      setFiles(event.target.files);
+    if (event.target.files?.length && inputRef.current) {
+      const isChecked = fileLimitCheck(event.target.files);
+      if (isChecked) {
+        setFiles(event.target.files);
+      } else {
+        openInfoToast();
+        setError(FILE_LARGE_ERROR_MSG);
+        clearAllFiles();
+      }
     }
   };
 
@@ -58,7 +93,7 @@ const useFileUpload = ({ accept }: Params) => {
     return props;
   };
 
-  return { open, getInputProps, files, totalSize, clearAllFiles };
+  return { open, getInputProps, files, totalSize, clearAllFiles, error };
 };
 
 export default useFileUpload;
