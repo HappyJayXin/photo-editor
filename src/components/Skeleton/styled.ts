@@ -1,61 +1,55 @@
 import styled, { keyframes } from 'styled-components';
 
-const shape: { [index: string]: string } = {
-  rect: '',
-  text: `
-    margin-top: 8px;
-    margin-bottom: 8px;
-    transform-origin: 0 65%;
-    transform: translateZ(0) scale(1, 0.65);
-    border-radius: 4px;
-    text-indent: -999px;
-
-    &:empty:before {
-      content: ' ';
-    }
-  `,
-  circle: `
-    border-radius: 50%;
-  `,
-};
-
-const loading = keyframes`
-  0% {
-    transform: translateX(-100%);
-  }
-  60% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+const wave = keyframes`
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
 `;
 
-export const Element = styled('div')<{ variant: string }>`
-  display: block;
-  margin: 5px 0;
+type Size = {
+  width: string;
+  height: string;
+};
 
-  ${(props) => shape[props.variant]};
+export const Circle = styled.div<Size>`
+  border-radius: 50%;
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  background: linear-gradient(
+    to right,
+    rgba(130, 130, 130, 0.2) 8%,
+    rgba(130, 130, 130, 0.3) 18%,
+    rgba(130, 130, 130, 0.2) 33%
+  );
+  background-size: 800px 100px;
+  animation: ${wave} 2s infinite ease-out;
+`;
 
-  position: relative;
-  background-color: ${({ theme }) => theme.colors.grey[300]};
-  overflow: hidden;
+export const Line = styled.div<Size>`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(130, 130, 130, 0.2) 8%,
+    rgba(130, 130, 130, 0.3) 18%,
+    rgba(130, 130, 130, 0.2) 33%
+  );
+  background-size: 800px 100px;
+  animation: wave-lines 2s infinite ease-out;
+  animation: ${wave} 2s infinite ease-out;
+`;
 
-  &::after {
-    display: block;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    animation: 2s ${loading} linear 0.5s infinite;
-    background: ${({ theme }) =>
-      `linear-gradient(90deg, transparent, ${theme.colors.grey[200]}, transparent)`};
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    transform: translateX(-100%);
-    z-index: 1;
-  }
+export const Square = styled.div<Size>`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  height: 80px;
+  border-radius: 5px;
+  background: linear-gradient(
+    to right,
+    rgba(130, 130, 130, 0.2) 8%,
+    rgba(130, 130, 130, 0.3) 18%,
+    rgba(130, 130, 130, 0.2) 33%
+  );
+  background-size: 800px 100px;
+  animation: ${wave} 2s infinite ease-out;
 `;
