@@ -1,11 +1,15 @@
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'next-i18next';
+
 import Typography from '@/components/Typography';
 import Button from '@/components/Button';
 import { Flex } from '@/components/System';
+import { useDialog } from '@/components/Dialog';
+import { useModal } from '@/components/Modal';
+
 import { useTypedSelector, useActions } from '@/redux/hook';
 import { HeaderContainer } from './styled';
 import HeaderLoader from './components/Loader/Header';
-import { useDialog } from '@/components/Dialog';
 
 import type { EventFunctionCallback } from '@/types/common';
 
@@ -15,9 +19,11 @@ const Header = () => {
   const isLoader = file.info === null;
 
   const { setFileInfo } = useActions();
+  const isOpenFileInit = useRef(false);
   const handleOk: EventFunctionCallback = (onClose) => {
     onClose();
     setFileInfo(null);
+    isOpenFileInit.current = true;
   };
 
   const { setDialog } = useDialog();
@@ -31,6 +37,18 @@ const Header = () => {
       },
     });
   };
+
+  const { openModal } = useModal();
+  useEffect(() => {
+    if (file.info === null) {
+      openModal({
+        type: 'upload',
+        data: {
+          isOpenFileInit: isOpenFileInit.current,
+        },
+      });
+    }
+  }, [file.info]);
 
   if (isLoader) return <HeaderLoader />;
   return (

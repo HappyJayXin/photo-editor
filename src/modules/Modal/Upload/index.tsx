@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 
 import Button from '@/components/Button';
-import Modal, {
+import {
+  useModal,
   ModalTitle,
   ModalContent,
   ModalAction,
@@ -10,20 +11,16 @@ import Modal, {
 import Typography from '@/components/Typography';
 
 import useFileUpload from '@/hooks/useFileUpload';
-import { useActions, useTypedSelector } from '@/redux/hook';
+import { useActions } from '@/redux/hook';
 import uuidv4 from '@/helpers/utils/uuidv4';
 import useEffectAsync from '@/hooks/useEffectAsync';
 
-const UploadModal = () => {
+import type { UploadPayload } from '@/components/Modal';
+
+const UploadModal = ({ isOpenFileInit }: UploadPayload['data']) => {
   const { t } = useTranslation('modal');
-
-  const file = useTypedSelector((state) => state.file);
   const { setFileInfo } = useActions();
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setIsOpen(file.info === null);
-  }, [file.info]);
+  const { closeModal } = useModal();
 
   const { open, getInputProps, files, clearAllFiles, error } = useFileUpload({
     accept: 'image/jpeg, image/png, image/jpg',
@@ -40,11 +37,18 @@ const UploadModal = () => {
         settings: {},
       });
       clearAllFiles();
+      closeModal();
     }
   }, [files, error]);
 
+  useEffect(() => {
+    if (isOpenFileInit) {
+      open();
+    }
+  }, [isOpenFileInit]);
+
   return (
-    <Modal isOpen={isOpen}>
+    <>
       <ModalTitle title={t('upload_title')} />
       <ModalContent>
         <Typography variant="body1">{t('upload_content')}</Typography>
@@ -53,7 +57,7 @@ const UploadModal = () => {
         <Button onClick={open}>{t('common:upload')}</Button>
         <input {...getInputProps()} />
       </ModalAction>
-    </Modal>
+    </>
   );
 };
 

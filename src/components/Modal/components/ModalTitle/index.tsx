@@ -1,26 +1,12 @@
-import styled from 'styled-components';
 import Icon from '@/components/Icon';
 import { Box } from '@/components/System';
-import Typography from '../Typography';
+import Typography from '@/components/Typography';
+import { TitleWrapper } from './styled';
 
 type Props = {
   title: string;
   onClose?: () => void;
 };
-
-const TitleWrapper = styled.header`
-  position: sticky;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  background: ${({ theme }) => theme.colors.grey[0]};
-  box-shadow: ${({ theme }) => theme.elevations[1]};
-
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-`;
 
 const ModalTitle = ({ title, onClose }: Props) => (
   <TitleWrapper>
