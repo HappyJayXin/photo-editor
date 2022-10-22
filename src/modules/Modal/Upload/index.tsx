@@ -15,7 +15,7 @@ import uuidv4 from '@/helpers/utils/uuidv4';
 import useEffectAsync from '@/hooks/useEffectAsync';
 
 const UploadModal = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('modal');
 
   const file = useTypedSelector((state) => state.file);
   const { setFileInfo } = useActions();
@@ -45,12 +45,12 @@ const UploadModal = () => {
 
   return (
     <Modal isOpen={isOpen}>
-      <ModalTitle title={t('modal_upload_title')} />
+      <ModalTitle title={t('upload_title')} />
       <ModalContent>
-        <Typography variant="body1">{t('modal_upload_content')}</Typography>
+        <Typography variant="body1">{t('upload_content')}</Typography>
       </ModalContent>
       <ModalAction>
-        <Button onClick={open}>{t('upload')}</Button>
+        <Button onClick={open}>{t('common:upload')}</Button>
         <input {...getInputProps()} />
       </ModalAction>
     </Modal>

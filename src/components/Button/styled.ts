@@ -29,7 +29,7 @@ const variantStyles = ({ theme, color }: VariantStyles) => ({
     border-color: ${theme.colors[color].main};
     border: 1px solid;
     &:hover:not([disabled]) {
-      background: ${theme.colors[color].light};
+      background: ${theme.colors[color].main};
       color: ${theme.colors[color].contrastText};
       border-color: ${theme.colors[color].light};
     }
@@ -96,7 +96,7 @@ const buttonStyle = ({ fullWidth, minWidth = '110px' }: StyleProps) => css`
   box-sizing: border-box;
   transition: all 0.1s linear;
   outline: none;
-  border-radius: 4px;
+  border-radius: 16px;
   min-width: ${fullWidth ? '100%' : minWidth};
 `;
 

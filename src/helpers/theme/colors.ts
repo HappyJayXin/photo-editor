@@ -9,7 +9,7 @@ const colors = {
     main: '#f44336',
     light: '#ff7961',
     dark: '#ba000d',
-    contrastText: '#000',
+    contrastText: '#fff',
   },
   grey: {
     0: '#ffffff',

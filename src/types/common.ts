@@ -6,6 +6,10 @@ export type EventCallback<T1 = any, T2 = void> = {
   (param1: T1): T2;
 };
 
+export type EventFunctionCallback = <T1 extends (v?: any) => void>(
+  onClose: T1,
+) => void;
+
 export type TFunction = (key: string) => string;
 
 export type ApiResponse<T> = {

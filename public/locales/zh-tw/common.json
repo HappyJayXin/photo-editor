@@ -1,7 +1,5 @@
 {
   "upload": "上傳",
   "share": "分享",
-
-  "modal_upload_title": "上傳檔案",
-  "modal_upload_content": "請先上傳小於 2MB 的圖片檔案。"
+  "re_upload": "重新上傳"
 }

@@ -18,7 +18,7 @@ const HomePage: NextPage = () => (
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common'])),
+    ...(await serverSideTranslations(locale, ['common', 'dialog', 'modal'])),
   },
 });
 

@@ -14,7 +14,7 @@ export const fileSlice = createSlice({
   name: reducerKey.FILE,
   initialState,
   reducers: {
-    setFileInfo(state, action: PayloadAction<FileInfo>) {
+    setFileInfo(state, action: PayloadAction<FileInfo | null>) {
       state.info = action.payload;
     },
   },

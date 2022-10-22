@@ -2,12 +2,12 @@ import { useCallback, useState } from 'react';
 import DialogContainer from './DialogContainer';
 import { DialogContext } from './hook/useDialog';
 
-import type { DialogContextProps, Message } from './type';
+import type { DialogContextProps, DialogInfo } from './type';
 import type { ChildrenProps } from '@/types/common';
 
 const DialogProvider = ({ children }: ChildrenProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dialogInfo, setDialogInfo] = useState<Message>();
+  const [dialogInfo, setDialogInfo] = useState<DialogInfo>();
 
   const setDialog: DialogContextProps['setDialog'] = useCallback(
     (params) => {
@@ -17,12 +17,12 @@ const DialogProvider = ({ children }: ChildrenProps) => {
     [setDialogInfo],
   );
 
-  const closeDialog: DialogContextProps['closeDialog'] = useCallback(() => {
+  const onClose: DialogContextProps['onClose'] = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
 
   return (
-    <DialogContext.Provider value={{ setDialog, closeDialog }}>
+    <DialogContext.Provider value={{ setDialog, onClose }}>
       {children}
       <DialogContainer isOpen={isOpen} info={dialogInfo} />
     </DialogContext.Provider>

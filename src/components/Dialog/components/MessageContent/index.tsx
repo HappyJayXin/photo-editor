@@ -1,9 +1,9 @@
 import Typography from '@/components/Typography';
 import Button from '@/components/Button';
 import { Flex, Box } from '@/components/System';
-import type { MessageProps } from '../../type';
+import type { ContentProps, Message } from '../../type';
 
-type Props = MessageProps;
+type Props = ContentProps<Message>;
 
 const MessageDialog = ({ title, body, onClose, t }: Props) => (
   <>

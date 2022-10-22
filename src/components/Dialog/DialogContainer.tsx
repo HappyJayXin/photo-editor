@@ -3,22 +3,25 @@ import Dialog from './Dialog';
 import useDialog from './hook/useDialog';
 
 import MessageContent from './components/MessageContent';
+import ConfirmContent from './components/ConfirmContent';
 
-import type { Message } from './type';
+import type { DialogInfo } from './type';
 
 type Props = {
   isOpen: boolean;
-  info?: Message;
+  info?: DialogInfo;
 };
 
 const DialogContainer = ({ info, isOpen }: Props) => {
-  const { t } = useTranslation();
-  const { closeDialog } = useDialog();
+  const { t } = useTranslation('dialog');
+  const { onClose } = useDialog();
 
-  const getContent = (info: Message) => {
+  const getContent = (info: DialogInfo) => {
     switch (info.type) {
       case 'message':
-        return <MessageContent {...info.data} t={t} onClose={closeDialog} />;
+        return <MessageContent {...info.data} t={t} onClose={onClose} />;
+      case 'confirm':
+        return <ConfirmContent {...info.data} t={t} onClose={onClose} />;
     }
   };
 
