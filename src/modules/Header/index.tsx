@@ -8,7 +8,7 @@ import { useDialog } from '@/components/Dialog';
 import { useModal } from '@/components/Modal';
 
 import { useTypedSelector, useActions } from '@/redux/hook';
-import { HeaderContainer } from './styled';
+import { HeaderContainer } from '@/styles/common';
 import HeaderLoader from './components/Loader/Header';
 
 import type { EventFunctionCallback } from '@/types/common';
@@ -52,7 +52,7 @@ const Header = () => {
 
   if (isLoader) return <HeaderLoader />;
   return (
-    <HeaderContainer>
+    <HeaderContainer index={10}>
       <Flex container justifyContent="space-between">
         <Typography variant="title6">{file.info?.name}</Typography>
         <Flex container gap="4px">

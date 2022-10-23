@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 import { useToast } from '@/components/Toast';
+import { useTranslation } from 'next-i18next';
 
 type InputProps = {
   type: 'file';
@@ -15,12 +16,13 @@ type Params = {
   limitSize?: number;
 };
 
-const FILE_LARGE_ERROR_MSG = '檔案太大';
-
 const useFileUpload = ({ accept, limitSize }: Params) => {
   const [files, setFiles] = useState<FileList>();
   const [totalSize, setTotalSize] = useState(0);
   const [error, setError] = useState('');
+
+  const { t } = useTranslation();
+  const FILE_LARGE_ERROR_MSG = t('file_large');
 
   const { addToast } = useToast();
   const openInfoToast = () => {

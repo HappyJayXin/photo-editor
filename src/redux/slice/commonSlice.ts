@@ -8,10 +8,12 @@ type WindowDimensions = {
 
 type CommonState = {
   windowDimensions: WindowDimensions;
+  isToolSetting: boolean;
 };
 
 const initialState: CommonState = {
   windowDimensions: { width: 0, height: 0 },
+  isToolSetting: false,
 };
 
 export const commonSlice = createSlice({
@@ -20,6 +22,9 @@ export const commonSlice = createSlice({
   reducers: {
     setWindowDimensions(state, action: PayloadAction<WindowDimensions>) {
       state.windowDimensions = action.payload;
+    },
+    toggleToolSetting(state, action: PayloadAction<boolean>) {
+      state.isToolSetting = action.payload;
     },
   },
   extraReducers: {},
